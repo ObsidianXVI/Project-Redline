@@ -1,1 +1,3 @@
-library project_redline;
+library redline;
+
+export './dimensions/dimensions.dart';
