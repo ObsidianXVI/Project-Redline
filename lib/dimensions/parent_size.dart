@@ -2,11 +2,11 @@ part of redline.dimensions;
 
 class ParentSize extends StatelessWidget {
   final Widget child;
-  final Color? color;
+  final BoxDecoration? decoration;
 
   const ParentSize({
     required this.child,
-    this.color,
+    this.decoration,
     super.key,
   });
 
@@ -15,7 +15,7 @@ class ParentSize extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: color,
+      decoration: decoration,
       child: child,
     );
   }
