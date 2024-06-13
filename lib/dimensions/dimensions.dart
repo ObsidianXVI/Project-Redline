@@ -1,9 +1,14 @@
 library redline.dimensions;
 
+import 'dart:html';
+
 import 'package:flutter/widgets.dart';
+import 'package:project_redline/multi_platform/multi_platform.dart';
 
 part './viewport_size.dart';
+part './viewport_scaled.dart';
 part './parent_size.dart';
+part './parent_scaled.dart';
 
 class Dimensions {
   static double height(BuildContext context) {
