@@ -1,36 +1,10 @@
-/// # Adaptive Switching
-/// To use adaptive breakpoint switching (ABS):
-/// ## Configure
-/// - Fill up the [AdaptiveBreakpointConfigs.breakpointsRegistry] with different contstraints for each breakpoint. Each entry maps a [List] of 2 [Size]s — the lower bound and upper bound — to a [Widget] builder
-/// - Each [Widget] builder is passed an instance of the widget's [AdaptiveBreakpointSwitching] instance
-/// - Inside the builder, call the desired method on the [AdaptiveBreakpointSwitching] instance that builds the right [Widget] for that breakpoint
-///
-/// ## Use
-/// - Extend one of the base classes with ABS: [StatelessABS] for [StatelessWidget]s and [StatefulABS] for [State] objects accompanying [StatefulWidget]s
-/// - Implement the
-
-/**
- * mixin MyAbs on AdaptiveBreakpointSwitching {
-  Widget buildIOS();
-}
-
-class MyCard extends StatelessABS with MyAbs {
-  @override
-  Widget buildIOS() {
-    // TODO: implement buildIOS
-    throw UnimplementedError();
-  }
-}
-
- */
 library redline.multiplatform;
 
+import 'dart:html';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
-import 'dart:html';
 
-part './adaptive_switching.dart';
 part './textstyle_delegate.dart';
 
 abstract class DetectedPlatform {
@@ -70,16 +44,16 @@ class Multiplatform {
   /// and nobody can change it because we've already been vendor locked-in to stupid
   /// JavaScript and DOM.
   /// See also: https://stackoverflow.com/questions/4629969/ios-return-bad-value-for-window-innerheight-width
+  /// Fixed with: <meta name="viewport" content="width=device-width, initial-scale=1" />
   static void init({
-    required BuildContext context,
     required PlatformSelector platformSelector,
     required TextStyle baseStyle,
   }) {
     if (_hasInit) return;
     Multiplatform.platformSelector = platformSelector;
     Multiplatform.baseStyle = baseStyle;
-    Multiplatform.currentPlatform = platformSelector(
-        document.body!.clientWidth, document.body!.clientHeight);
+    Multiplatform.currentPlatform =
+        platformSelector(window.innerWidth!, window.innerHeight!);
 
     _hasInit = true;
   }
