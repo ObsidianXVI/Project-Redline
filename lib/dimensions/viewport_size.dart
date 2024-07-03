@@ -11,8 +11,22 @@ class ViewportSize extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Dimensions.height(context),
-      width: Dimensions.width(context),
+      height: Dimensions.height(),
+      width: Dimensions.width(),
+      child: child,
+    );
+  }
+}
+
+mixin VisibilityDetection {
+  Widget withVisibilityCallback({
+    required Key key,
+    required Widget child,
+    required void Function(VisibilityInfo) onVisibilityChanged,
+  }) {
+    return VisibilityDetector(
+      key: key,
+      onVisibilityChanged: onVisibilityChanged,
       child: child,
     );
   }
